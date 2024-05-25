@@ -1,0 +1,63 @@
+<p>book-store</p>
+
+
+<div class="form-container">
+    <form [formGroup]="formGroup">
+
+        <div class="form-row">
+            <label for="bookTitle">Book Title</label>
+            <input pInputText id="bookTitle" aria-describedby="bookTitle-help" formControlName="bookTitle" />
+            
+        </div>
+
+        <div class="form-row">
+            <label for="bookDescription">Book Description</label>
+            <input pInputText id="bookDescription" aria-describedby="bookDescription-help" formControlName="bookDescription" />
+        </div>
+
+        <div class="form-row">
+            <label for="author">Author</label>
+            <input pInputText id="author" aria-describedby="author-help" formControlName="author" />
+        </div>
+
+        <div class="form-row">
+            <label for="publishDate">Publish Date</label>
+            <p-calendar formControlName="publishDate" id="publishDate" aria-describedby="publishDate-help"
+                [(ngModel)]="filter.publishDate"></p-calendar>
+
+                
+        </div>
+
+        <p-button label="Search"  (onClick)="search()"></p-button>
+    </form>
+</div>
+
+
+
+<div class="card-container card flex justify-content-center"
+     (scroll)="onScroll($event)">
+  <div *ngFor="let item of items">
+    <p-card [header]="item.bookTitle" [subheader]="item.author" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+        <img alt="Card" [src]="item.coverBase64" />
+      </ng-template>
+      <p>{{item.bookDescription}}</p>
+      <p>{{item.publishDate | date: 'dd/MM/yyyy'}}</p>
+    </p-card>
+  </div>
+</div>
+
+<!-- <div class="card-container card flex justify-content-center">
+    <div *ngFor="let item of items">
+        <p-card [header]="item.bookTitle" [subheader]="item.author" [style]="{ width: '360px' }">
+            <ng-template pTemplate="header">
+                <img alt="Card" [src]="item.coverBase64" />
+            </ng-template>
+            <p>
+                {{item.bookDescription}}
+            </p>
+            <p> {{item.publishDate | date: 'dd/MM/yyyy'}}
+            </p>
+        </p-card>
+    </div>
+</div> -->
